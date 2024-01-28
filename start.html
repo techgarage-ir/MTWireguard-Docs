@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MTWireguard - Installation</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MTWireguard, Mikrotik Wireguard GUI">
+    <meta name="author" content="TechGarage">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/litera/bootstrap.min.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/eleganticons@0.0.1/css/style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css">
+      
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/mikrotik.css">
+    
+</head>
+
+<body class="body-green">
+    <div class="page-wrapper">
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="/">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">MT</span><span class="text-bold">Wireguard</span>
+                        </a>
+                    </h1>
+                </div>
+                
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Quick Start</li>
+                </ol>
+            </div>
+        </header>
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Quick Start</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: Jan 26nd</div>
+                </div>
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="introduction-section" class="doc-section">
+                                <h2 class="section-title">Introduction</h2>
+                                <div class="section-block">
+                                    <p>MTWireguard is an open-source, powerful and secure web-based tool to manage Wireguard on Mikrotik devices. <br>
+                                        You can manage Wireguard interface and peers on Mikrotik system (Physical Router or CHR VM). <br>
+                                        It also contains some useful options to make your work easy.</p>
+                                </div>
+                                <div id="whats" class="section-block">
+                                    <h3 class="block-title">What's This</h3>
+                                    <p>MTWireGuard is not a VPN. It's a web interface built to make using Wireguard on Mikrotik easier. <br>
+                                        It is based on docker containers which makes it possible to run on Mikrotik RouterOS (see <a href="#requirements">requirements</a>). <br>
+                                        It's based on lightweigth Ubuntu-Chiseled images.</p>
+                                    <h5>Platforms used</h5>
+                                    <ul>
+                                        <li class="mb-2"><strong class="me-1">Docker:</strong> <code class="language-markup px-1">container</code></li>
+                                        <li class="mb-2"><strong class="me-1">Ubuntu-Chiseled:</strong> <code class="language-markup px-1">os</code></li>
+                                        <li class="mb-2"><strong class="me-1">ASP.net Core:</strong> <code class="language-markup px-1">back-end</code></li>
+                                        <li><strong class="me-1">Bootstrap:</strong> <code class="language-markup px-1">front-end</code></li>
+                                    </ul>
+                                </div>
+                                <div id="privacy" class="section-block">
+                                    <h3 class="block-title">Privacy</h3>
+                                    <h5>Sensitive data privacy clarity</h5>
+                                    <p>No information will sent to other servers. All your data is stored in your device. Wireguard peer's private-key will be held in a local database placed in the project directory. That's explained in FAQs section.
+                                        Error logging only sends information about errors in application codes to help us improve the project and fix problems. This feature can be disabled from settings page.</p>
+                                </div>
+                                <div id="requirements" class="section-block">
+                                    <h3 class="block-title">Requirements</h3>
+                                    <p>There are some basic hardware/software requirements to run this project</p>
+                                    <ul>
+                                        <li class="mb-2"><strong class="me-1">RouterBoard or machine running RouterOS v7.6+</strong> <code class="language-markup px-1">with root access</code></li>
+                                        <li class="mb-2"><strong class="me-1">At least 1GB of RAM</strong> <code class="language-markup px-1">Recommended 2/4GB</code></li>
+                                        <li class="mb-2"><strong class="me-1">At least 512MB of HDD</strong> <code class="language-markup px-1">Recommended 5/10GB</code></li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <section id="installation-section" class="doc-section">
+                                <h2 class="section-title">Installation</h2>
+                                <p>Installation is so simple and takes upto 3 minutes</p>
+                                <div id="enable-docker" class="section-block">
+                                    <h3 class="block-title">Enable Container</h3>
+                                    <p class="mb-1">At first, you need to enable <a href="https://help.mikrotik.com/docs/display/ROS/Container">container</a> in device-mode on RouterOS to use docker images. <br>
+                                        Enable container using this code:</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/system/device-mode/</code>
+                                        <br>
+                                        <code class="ros functions">update </code>
+                                        <code class="ros value">container</code><code class="ros plain">=yes</code>
+                                    </div>
+                                    <p class="mb-1">After enabling container, it's required to reboot device with hardware button or if it's virtual machine, turn off and turn on machine from the host.
+                                        Set registry-url (to download containers from Docker registry) and set extract directory (tmpdir) to a storage (recommended USB device or second HDD).</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/container/config/</code>
+                                        <br>
+                                        <code class="ros functions">set </code>
+                                        <code class="ros value">registry-url</code><code class="ros plain">=<a href="https://registry-1.docker.io">https://registry-1.docker.io</a></code>
+                                        <code class="ros value">tmpdir</code><code class="ros plain">=disk1/pull</code>
+                                    </div>
+                                    <div class="alert alert-warning mb-1 mt-3" role="alert">
+                                        If your server is located in Iran, it's recommended to use <a class="theme-link" href="https://shecan.ir">Shecan</a> DNS /  <a class="theme-link" href="https://403.online">403.online</a> DNS or <strong>route your traffic through a VPN</strong> to download docker images.
+                                    </div>
+                                    <small>Shecan</small>
+                                    <div class="border rounded mb-1 p-2">
+                                        <code class="ros constants">/ip/dns/</code><code class="ros functions">set </code>
+                                        <code class="ros value">servers</code><code class="ros plain">=185.51.200.2,178.22.122.100</code>
+                                    </div>
+                                    <small>403</small>
+                                    <div class="border rounded mb-1 p-2">
+                                        <code class="ros constants">/ip/dns/</code><code class="ros functions">set </code>
+                                        <code class="ros value">servers</code><code class="ros plain">=10.202.10.102,10.202.10.202</code>
+                                    </div>
+                                    <div class="alert alert-success mb-1 mt-3" role="alert">
+                                        To prevent this kind of problems, it's possible to use GitHub Registry to get images as an alternative to <a href="https://docker.io">Docker</a> registry. <br>
+                                        Use the following code to get image from GitHub:
+                                    </div>
+                                    <div class="border rounded my-1 p-2">
+                                        <code class="ros constants">/container/config/</code>
+                                        <br>
+                                        <code class="ros functions">set </code>
+                                        <code class="ros value">registry-url</code><code class="ros plain">=<a href="https://ghcr.io">https://ghcr.io</a></code>
+                                    </div>
+                                </div>
+                                <div id="enable-restapi"  class="section-block">
+                                    <h3 class="block-title">Enable REST-API</h3>
+                                    <p>Rest-API must be enabled to allow communication between RouterOS and MTWireguard service. To start using REST-API, the <code>www-ssl</code> or <code>www</code> (starting with RouterOS v7.9) service must be configured and running. <br>
+                                        It's recommended using <code>www-ssl</code> service with and a valid SSL certificate. RouterOS has built-in option to create valid SSL certificates. <br>
+                                        RouterOS v7 has Let's Encrypt (letsencrypt) certificate support for the <code>www-ssl</code> service. To enable the Let's Encrypt certificate service with automatic certificate renewal, use the <code>enable-ssl-certificate</code> command:</p>
+                                    <div class="border rounded my-1 p-2">
+                                        <code class="ros constants">/certificate</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=root-cert</code>
+                                        <code class="ros value">common-name</code><code class="ros plain">=MTWG</code>
+                                        <code class="ros value">days-valid</code><code class="ros plain">=3650</code>
+                                        <code class="ros value">key-usage</code><code class="ros plain">=key-cert-sign,crl-sign</code>
+                                        <br>
+                                        <code class="ros functions">sign</code>
+                                        <code class="ros plain"> root-cert</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=https-cert</code>
+                                        <code class="ros value">common-name</code><code class="ros plain">=MTWG</code>
+                                        <code class="ros value">days-valid</code><code class="ros plain">=3650</code>
+                                        <br>
+                                        <code class="ros functions">sign</code>
+                                        <code class="ros value">ca</code><code class="ros plain">=root-cert</code>
+                                        <code class="ros plain"> https-cert</code>
+                                        <br>
+                                    </div>
+                                    <!--<div class="border rounded my-1 p-2">
+                                        <code class="ros constants">/certificate/</code><br>
+                                        <code class="ros functions">enable-ssl-certificate</code>
+                                        <code class="ros value"> dns-name</code><code class="ros plain">=my.domain.com</code>
+                                    </div>
+                                    <p>Note that the DNS name must point to the router and port TCP/80 must be available from the WAN. If the dns-name is not specified, it will default to the automatically generated ip cloud name (ie. http://example.sn.mynetname.net)</p>-->
+                                    <h3 class="block-title">Enable www-ssl service</h3>
+                                    <div class="border rounded my-1 p-2">
+                                        <code class="ros constants">/ip/service</code>
+                                        <br>
+                                        <code class="ros functions">set </code>
+                                        <code class="ros plain">www-ssl</code>
+                                        <code class="ros value">certificate</code><code class="ros plain">=https-cert</code>
+                                        <code class="ros value">disabled</code><code class="ros plain">=no</code>
+                                    </div>
+                                </div>
+                                <h2 id="network-configuration">Network Configuration</h2>
+                                <div id="config-bridge" class="section-block">
+                                    <h3 class="block-title">Containers Bridge</h3>
+                                    <p>When the Mikrotik is ready, it's time to configure virtual network for containers and install MTWireguard docker image.</p>
+                                    <hr>
+                                    <p class="mb-1">Create a VETH</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/interface/veth</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">address</code><code class="ros plain">=172.17.0.2/24</code>
+                                        <code class="ros value">gateway</code><code class="ros plain">=172.17.0.1</code>
+                                        <code class="ros value">name</code><code class="ros plain">=veth-mtwg</code>
+                                    </div>
+                                    <p class="mb-1">Create a bridge for containers and add VETH(s) to it:</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/interface/bridge</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=dockers</code>
+                                        <br>
+                                        <code class="ros constants">/interface/bridge/port</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">bridge</code><code class="ros plain">=dockers</code>
+                                        <code class="ros value">interface</code><code class="ros plain">=veth-mtwg</code>
+                                    </div>
+                                    <p class="mb-1">Set IP address on bridge for containers gateway:</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/ip/address</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">address</code><code class="ros plain">=172.17.0.1/24</code>
+                                        <code class="ros value">interface</code><code class="ros plain">=dockers</code>
+                                    </div>
+                                </div>
+                                <div id="config-firewall" class="section-block">
+                                    <h3 class="block-title">Firewall Rules</h3>
+                                    <p>After configuring network parameters, it's required to add some firewall rules.</p>
+                                    <hr>
+                                    <p class="mb-1">Setup src-nat for outgoing traffic of dockers
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/ip/firewall/nat</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">chain</code><code class="ros plain">=srcnat</code>
+                                        <code class="ros value">action</code><code class="ros plain">=masquerade</code>
+                                        <code class="ros value">src-address</code><code class="ros plain">=172.17.0.0/24</code>
+                                    </div>
+                                    <p class="mb-1">Setup dst-nat to access MTWireguard panel over internet <br>
+                                    <strong>Replace &lt;Public-IP&gt; with your Public IP address and &lt;Public-Port&gt; with the port number you want use to access MTWireguard.</strong></p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/ip/firewall/nat</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">chain</code><code class="ros plain">=dstnat</code>
+                                        <code class="ros value">action</code><code class="ros plain">=dst-nat</code>
+                                        <code class="ros value">dst-address</code><code class="ros plain">=&lt;Public-IP&gt;</code>
+                                        <code class="ros value">dst-port</code><code class="ros plain">=&lt;Public-Port &gt;</code>
+                                        <code class="ros value">protocol</code><code class="ros plain">=tcp</code>
+                                        <code class="ros value">to-addresses</code><code class="ros plain">=172.17.0.2</code>
+                                        <code class="ros value">to-ports</code><code class="ros plain">=8080</code>
+                                    </div>
+                                    <p>Now your virtual network is ready for docker containers. Let's setup container...</p>
+                                </div>
+                                <h2 id="container-configuration">Container Configuration</h2>
+                                <div id="config-variables" class="section-block">
+                                    <h3 class="block-title">Environment Variables</h3>
+                                    <p>Configure Mikrotik connections settings in container environments to allow container modify RouterOS</p>
+                                    <hr>
+                                    <p class="mb-1">Replace your Mikrotik username, password and public IP address in required fields.</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/container/envs</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=mtwg_envs</code>
+                                        <code class="ros value">key</code><code class="ros plain">=MT_IP</code>
+                                        <code class="ros value">value</code><code class="ros plain">=172.17.0.1</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=mtwg_envs</code>
+                                        <code class="ros value">key</code><code class="ros plain">=MT_USER</code>
+                                        <code class="ros value">value</code><code class="ros plain">=&lt;Mikrotik Username&gt;</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=mtwg_envs</code>
+                                        <code class="ros value">key</code><code class="ros plain">=MT_PASS</code>
+                                        <code class="ros value">value</code><code class="ros plain">=&lt;Mikrotik Password&gt;</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">name</code><code class="ros plain">=mtwg_envs</code>
+                                        <code class="ros value">key</code><code class="ros plain">=MT_PUBLIC_IP</code>
+                                        <code class="ros value">value</code><code class="ros plain">=&lt;Public IP&gt;</code>
+                                    </div>
+                                    <p class="mb-1">Install MTWireguard image from configured registry <br> Replace &quot;techgarageir&quot; with &quot;techgarage-ir&quot; if using GitHub registry.</p>
+                                    <div class="border rounded mb-3 p-2">
+                                        <code class="ros constants">/container</code>
+                                        <br>
+                                        <code class="ros functions">add </code>
+                                        <code class="ros value">remote-image</code><code class="ros plain">=techgarageir/mtwireguard:latest</code>
+                                        <code class="ros value">interface</code><code class="ros plain">=veth1</code>
+                                        <code class="ros value">root-dir</code><code class="ros plain">=disk1/mtwg</code>
+                                        <code class="ros value">envlist</code><code class="ros plain">=mtwg_envs</code>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <section id="security-settings" class="doc-section">
+                                <h2 class="section-title">Secure Access</h2>
+                                <p>To improve security, you can configure your Mikrotik in a more secure way.</p>
+                                <div class="alert alert-info my-3" role="alert">
+                                    If your server is located in Iran, change your DNS servers from Shecan/403 to a secure DNS server (Like 1.1.1.1 or 8.8.8.8) after docker image installed.
+                                </div>
+                                <p class="mb-1">Make www-ssl service accessible from MTWireguard only</p>
+                                <div class="border rounded mb-3 p-2">
+                                    <code class="ros constants">/ip/service</code>
+                                    <br>
+                                    <code class="ros functions">set </code>
+                                    <code class="ros plain">www-ssl</code>
+                                    <code class="ros value">address</code><code class="ros plain">=172.17.0.2</code>
+                                </div>
+                                <p class="mb-1">Create a restricted user for MTWireguard panel and limit it to be accessible only from MTWireguard IP</p>
+                                <div class="border rounded mb-3 p-2">
+                                    <code class="ros constants">/user/group</code>
+                                    <br>
+                                    <code class="ros functions">add </code>
+                                    <code class="ros value">name</code><code class="ros plain">=wgusers</code>
+                                    <code class="ros value">policy</code><code class="ros plain">=read,write,api,rest-api,!local,!telnet,!ssh,!ftp,!reboot,!policy,!test,!winbox,!password,!web,!sniff,!sensitive,!romon</code>
+                                    <br>
+                                    <code class="ros constants">/user</code>
+                                    <br>
+                                    <code class="ros functions">add</code>
+                                    <code class="ros value">name</code><code class="ros plain">=wgadmin</code>
+                                    <code class="ros value">password</code><code class="ros plain">=Str0ngP@S$w0rD</code>
+                                    <code class="ros value">group</code><code class="ros plain">=wgusers</code>
+                                    <code class="ros value">address</code><code class="ros plain">=172.17.0.2</code>
+                                </div>
+                                <p>Then use this user in container environment variables.</p>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+		                            <li class="nav-item">
+	                                    <a class="nav-link scrollto" href="#introduction-section">Introduction</a>
+		                            </li>
+                                    <nav class="nav doc-sub-menu nav flex-column">
+	                                    <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#whats">What's this ?</a>
+	                                    </li>
+	                                    <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#privacy">Privacy</a>
+	                                    </li>
+	                                    <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#requirements">Requirements</a>
+	                                    </li>
+                                    </nav>
+		                            <li class="nav-item">
+	                                    <a class="nav-link scrollto" href="#installation-section">Installation</a>
+		                            </li>
+                                    <nav class="nav doc-sub-menu nav flex-column">
+	                                    <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#enable-docker">Enable Docker</a>
+	                                    </li>
+	                                    <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#enable-restapi">Enable Rest-API</a>
+	                                    </li>
+                                    </nav>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#network-configuration">Network Configuration</a>
+                                    </li>
+                                    <nav class="nav doc-sub-menu nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#config-bridge">Containers Bridge</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#config-firewall">Firewall Rules</a>
+                                        </li>
+                                    </nav>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#container-configuration">Container Configuration</a>
+                                    </li>
+                                    <nav class="nav doc-sub-menu nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link scrollto" href="#config-variables">Environment Variables</a>
+                                        </li>
+                                    </nav>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#security-settings">Secure Access</a>
+                                    </li>
+	                            </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer text-center">
+        <div class="container">
+            <small class="copyright">
+                2024 &copy; MTWireGuard, All rights reserved. <br>
+                Documentation Template Designed with <span class="sr-only">love</span><i class="fas fa-heart"></i> by <a href="https://themes.3rdwavemedia.com/" target="_blank">Xiaoying Riley</a>
+            </small>
+        </div>
+    </footer>
+    
+     
+    <!-- Main Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gumshoe/5.1.1/gumshoe.polyfills.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"></script>
+    <script src="assets/js/main.js"></script>
+	
+	<!-- Cloudflare Web Analytics -->
+	<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2d5a234b8a4a4b9597c70120010c1a4f"}'></script>
+	<!-- End Cloudflare Web Analytics -->
+</body>
+</html>

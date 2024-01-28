@@ -1,0 +1,66 @@
+.ros {
+    /*background: var(--bs-body-bg);*/
+    background: inherit;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: normal !important;
+}
+
+.ros.plain,
+.ros.plain a {
+    color: #000 !important;
+}
+
+.ros.comments,
+.ros.comments a {
+    color: #008200 !important;
+}
+
+.ros.string,
+.ros.string a {
+    color: #036 !important;
+}
+
+.ros.keyword {
+    color: #369 !important;
+    font-weight: bold !important;
+}
+
+.ros.preprocessor {
+    color: gray !important;
+}
+
+.ros.variable {
+    color: #a70 !important;
+}
+
+.ros.value {
+    color: #090 !important;
+}
+
+.ros.functions {
+    color: #ff1493 !important;
+}
+
+.ros.constants {
+    color: #0066CC !important;
+}
+
+.ros.script {
+    background-color: yellow !important;
+}
+
+.ros.color1,
+.ros.color1 a {
+    color: #808080 !important;
+}
+
+.ros.color2,
+.ros.color2 a {
+    color: #ff1493 !important;
+}
+
+.ros.color3,
+.ros.color3 a {
+    color: red !important;
+}

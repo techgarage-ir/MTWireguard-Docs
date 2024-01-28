@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+:root {
+    scroll-behavior: smooth
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99
+}
+
+.list-group-item:not(:last-child) {
+    border: none;
+    border-bottom: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color)
+}
+
+.list-group-item i {
+    font-size: 16pt
+}
+
+.badge {
+    font-weight: 500
+}
+
+.badge:not(.bg-light) {
+    text-shadow: 1px 1px var(--bs-dark)
+}
+
+.badge.bg-light {
+    text-shadow: 1px 1px var(--bs-light)
+}
+
+.btn {
+    transition: .5s
+}
+
+.btn.btn-labeled {
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+.btn .btn-label {
+    display: flex;
+    position: relative;
+    left: -12px;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 3px 0 0 3px;
+    align-items: center
+}
+
+.btn .btn-label i.bx {
+    font-size: 1.2rem;
+    padding-right: .5rem;
+    border-right: 1px solid var(--bs-dark)
+}
+
+.form-control,
+.form-select {
+    border: var(--bs-border-width) solid var(--bs-border-color) !important
+}
+
+.input-group-text {
+    background-color: var(--bs-light-bg-subtle) !important;
+    border: var(--bs-border-width) solid var(--bs-border-color) !important
+}
+
+.card {
+    background: var(--bs-secondary-bg)
+}
+
+.card .card-title {
+    --bs-card-title-spacer-y: 0
+}
+
+.dropdown-toggle.hide-arrow::after {
+    display: none
+}
+
+@media (max-width:575.98px) {
+    .content .navbar .navbar-nav .nav-link {
+        margin-left: 15px
+    }
+}
+
+footer {
+    border-top: 1px solid var(--bs-border-color-translucent)
+}
+
+#logs {
+    max-width: 350px
+}
+
+#logs span.badge {
+    --bs-badge-padding-x: .5rem;
+    --bs-badge-padding-y: .3rem
+}
